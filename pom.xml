@@ -63,6 +63,7 @@
     <module>hbase-shaded-jackson-jaxrs-json-provider</module>
     <module>hbase-noop-htrace</module>
     <module>hbase-unsafe</module>
+    <module>hbase-shaded-calcite</module>
   </modules>
   <scm>
     <connection>scm:git:git://git.apache.org/hbase-thirdparty.git</connection>
@@ -151,6 +152,7 @@
     <jakarta.validation-api.version>2.0.2</jakarta.validation-api.version>
     <javassist.version>3.30.2-GA</javassist.version>
     <jackson-jaxrs-json-provider.version>2.17.2</jackson-jaxrs-json-provider.version>
+    <calcite.version>1.38.0</calcite.version>
   </properties>
   <build>
     <pluginManagement>

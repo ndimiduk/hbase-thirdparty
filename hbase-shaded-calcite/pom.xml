@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <!--
+  /**
+   * Licensed to the Apache Software Foundation (ASF) under one
+   * or more contributor license agreements.  See the NOTICE file
+   * distributed with this work for additional information
+   * regarding copyright ownership.  The ASF licenses this file
+   * to you under the Apache License, Version 2.0 (the
+   * "License"); you may not use this file except in compliance
+   * with the License.  You may obtain a copy of the License at
+   *
+   *     http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software
+   * distributed under the License is distributed on an "AS IS" BASIS,
+   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   * See the License for the specific language governing permissions and
+   * limitations under the License.
+   */
+
+
+    ON MVN COMPILE NOT WORKING
+
+    If you wondering why 'mvn compile' does not work building HBase
+    (in particular, if you are doing it for the first time), instead do
+    'mvn package'.  If you are interested in the full story, see
+    https://issues.apache.org/jira/browse/HBASE-6795.
+
+  -->
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.apache.hbase.thirdparty</groupId>
+        <artifactId>hbase-thirdparty</artifactId>
+        <version>${revision}</version>
+        <relativePath>..</relativePath>
+    </parent>
+    <artifactId>hbase-shaded-calcite</artifactId>
+    <name>Apache HBase Relocated (Shaded) Third-party Apache Calcite Libs</name>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>${basedir}</directory>
+                            <includes>
+                                <include>dependency-reduced-pom.xml</include>
+                            </includes>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <shadeSourcesContent>true</shadeSourcesContent>
+                            <createSourcesJar>true</createSourcesJar>
+                            <promoteTransitiveDependencies>true</promoteTransitiveDependencies>
+                            <createDependencyReducedPom>true</createDependencyReducedPom>
+                            <useDependencyReducedPomInJar>true</useDependencyReducedPomInJar>
+                            <relocations>
+                                <relocation>
+                                    <pattern>com.fasterxml.jackson.dataformat</pattern>
+                                    <shadedPattern>${rename.offset}.com.fasterxml.jackson.dataformat</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.google.common</pattern>
+                                    <shadedPattern>${rename.offset}.com.google.common</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.google.gson</pattern>
+                                    <shadedPattern>${rename.offset}.com.google.gson</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.google.protobuf</pattern>
+                                    <shadedPattern>${rename.offset}.com.google.protobuf</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.google.thirdparty</pattern>
+                                    <shadedPattern>${rename.offset}.com.google.thirdparty</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.google.uzaygezen</pattern>
+                                    <shadedPattern>${rename.offset}.com.google.uzaygezen</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.googlecode.json-simple</pattern>
+                                    <shadedPattern>${rename.offset}.com.googlecode.json-simple</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.jayway.jsonpath</pattern>
+                                    <shadedPattern>${rename.offset}.com.jayway.jsonpath</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.yahoo.sketches</pattern>
+                                    <shadedPattern>${rename.offset}.com.yahoo.sketches</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.yahoo.memory</pattern>
+                                    <shadedPattern>${rename.offset}.com.yahoo.memory</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>javax.transaction</pattern>
+                                    <shadedPattern>${rename.offset}.javax.transaction</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>net.minidev</pattern>
+                                    <shadedPattern>${rename.offset}.net.minidev</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.apache.calcite</pattern>
+                                    <shadedPattern>${rename.offset}.org.apache.calcite</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.apache.commons</pattern>
+                                    <shadedPattern>${rename.offset}.org.apache.commons</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.apache.hc</pattern>
+                                    <shadedPattern>${rename.offset}.org.apache.hc</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.apiguardian</pattern>
+                                    <shadedPattern>${rename.offset}.org.apiguardian</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.checkerframework</pattern>
+                                    <shadedPattern>${rename.offset}.org.checkerframework</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.codehaus.commons</pattern>
+                                    <shadedPattern>${rename.offset}.org.codehaus.commons</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.codehaus.janino</pattern>
+                                    <shadedPattern>${rename.offset}.org.codehaus.janino</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.locationtech.jts</pattern>
+                                    <shadedPattern>${rename.offset}.org.locationtech.jts</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.locationtech.proj4j</pattern>
+                                    <shadedPattern>${rename.offset}.org.locationtech.proj4j</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.json.simple</pattern>
+                                    <shadedPattern>${rename.offset}.org.json.simple</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                  <pattern>org.objectweb</pattern>
+                                  <shadedPattern>${rename.offset}.org.objectweb</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                  <pattern>org.pentaho</pattern>
+                                  <shadedPattern>${rename.offset}.org.pentaho</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                  <pattern>org.yaml.snakeyaml</pattern>
+                                  <shadedPattern>${rename.offset}.org.yaml.snakeyaml</shadedPattern>
+                                </relocation>
+                            </relocations>
+                            <artifactSet>
+                                <excludes>
+                                    <!--Exclude protobuf itself. We get a patched version in adjacent module.
+                                          Exclude other dependencies of guava, netty, etc.
+
+                                        Anything added here needs to be excluded from the jar that pulls it in
+                                        also else we give an odd signal in the META-INF/DEPENDENCIES that we
+                                        produce. See below for how to exclusion of transitive dependencies.
+                                      -->
+                                    <exclude>com.google.protobuf:protobuf-java</exclude>
+                                    <exclude>com.google.code.findbugs:jsr305</exclude>
+                                    <exclude>com.google.errorprone:error_prone_annotations</exclude>
+                                    <exclude>com.google.j2objc:j2objc-annotations</exclude>
+                                    <exclude>org.codehaus.mojo:animal-sniffer-annotations</exclude>
+                                    <exclude>com.google.code.gson:gson</exclude>
+                                    <exclude>org.slf4j:slf4j-api</exclude>
+                                </excludes>
+                            </artifactSet>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.MF</exclude>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                        <exclude>META-INF/DEPENDENCIES</exclude>
+                                        <exclude>**/*.module-info</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ApacheLicenseResourceTransformer">
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ApacheNoticeResourceTransformer">
+                                    <addHeader>false</addHeader>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.calcite</groupId>
+            <artifactId>calcite-core</artifactId>
+            <version>${calcite.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.google.errorprone</groupId>
+                    <artifactId>error_prone_annotations</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>listenablefuture</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.google.j2objc</groupId>
+                    <artifactId>j2objc-annotations</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.google.protobuf</groupId>
+                    <artifactId>protobuf-java</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.calcite</groupId>
+            <artifactId>calcite-server</artifactId>
+            <version>${calcite.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+</project>
